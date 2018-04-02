@@ -128,14 +128,23 @@ for(c1 in 1:length(IP_subject_folder)) #for.c1.begins
  
         #now check all 27 voxels around it and see which ones belong to grey matter.
         #and then create an averge signal using these voxels
+        
+        # define a vector "sphere_definition" the defines how far out in every direction we want to extract signal.
+        # for example, a "sphere_definition" of -2:2 will expand the search to voxels that are up to two positions away in every direction.
+        if(c2 > 264){
+          sphere_definition <- -1:1 # for those last 14 HIPP ROIs, make the search sphere smaller
+        } else {
+          sphere_definition <- -2:2 # for all of the 264 Power ROIs, keep it the same
+        }
+        
 
         voxel_count <- 0 
         signal <- rep(0,205)  #PARA
-        for(c3x in -2:2)#for.c3x.begins
+        for(c3x in sphere_definition)#for.c3x.begins
            {
-            for(c3y in -2:2)#for.c3y.begins
+            for(c3y in sphere_definition)#for.c3y.begins
                {
-                for(c3z in -2:2)#for.c3z.begins
+                for(c3z in sphere_definition)#for.c3z.begins
                    {
 
                      if(vox_x_cood+c3x > 0 && vox_x_cood+c3x <= BOLD$dim[1])
@@ -199,12 +208,12 @@ for(c1 in 1:length(IP_subject_folder)) #for.c1.begins
 
 
 
-functional_path <- '/mnt/psych-bhampstelab/fhillary/a_data/analysis/5_subsystems/1_createnetwork_positive/hippocampus/for_kyle/conn_files/'
+functional_path <- '/Users/kylekurkela/Desktop/HillaryLab/hipp_kyle/conn_files/'
 
-structural_path <- '/mnt/psych-bhampstelab/fhillary/a_data/analysis/5_subsystems/1_createnetwork_positive/hippocampus/for_kyle/resample_files/'
+structural_path <- '/Users/kylekurkela/Desktop/HillaryLab/hipp_kyle/resample_files/'
 
-subject_folder <- c('subject_AM05','subject_AM10','subject_AM15','subject_AM22','subject_AM23','subject_AM24','subject_AM35','subject_AM36','subject_AM53','subject_AM54','subject_AM55','subject_AM58','subject_AM60',
-'subject_AM64','subject_AM77','subject_AM79','subject_AM80','subject_AM82','subject_AM84')
+subject_folder <- c('subject_AM05','subject_AM10','subject_AM15','subject_AM22','subject_AM23') # ,'subject_AM24','subject_AM35','subject_AM36','subject_AM53','subject_AM54','subject_AM55','subject_AM58','subject_AM60',
+# 'subject_AM64','subject_AM77','subject_AM79','subject_AM80','subject_AM82','subject_AM84'
 
 
 
